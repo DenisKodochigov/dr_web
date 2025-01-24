@@ -34,9 +34,8 @@ class PackagesViewModel @Inject constructor(
     }
     private fun getPackages() {
         viewModelScope.launch {
-//            useCase.execute(GetPackageSUseCase.Request(0))
-//                .map { converter.convert(it) }
-//                .collect { submitState(it) }
+            useCase.execute(GetPackageSUseCase.Request(0))
+                .map { converter.convert(it) }.collect { submitState(it) }
         }
     }
 }

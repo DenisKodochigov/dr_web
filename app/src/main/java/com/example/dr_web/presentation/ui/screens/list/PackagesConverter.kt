@@ -10,7 +10,7 @@ class PackagesConverter @Inject constructor() :
     override fun convertSuccess(data: GetPackageSUseCase.Response): PackagesState {
         return PackagesState(
             headerText = "",
-            items = data.applications.map { PackageModel(title = it.name, body = it.par1, id = it.id,) }
+            items = data.applications.map{ PackageModel(title = it.name, body = it.par1, id = it.id,) }
         )
     }
 }
