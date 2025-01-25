@@ -12,16 +12,12 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.dr_web.presentation.ui.screens.Greeting
 import com.example.dr_web.presentation.ui.screens.list.PackagesScreen
-import com.example.dr_web.presentation.ui.screens.list.PackagesViewModel
 import com.example.dr_web.presentation.ui.screens.single.PackageScreen
-import com.example.dr_web.presentation.ui.screens.single.PackageViewModel
 
 fun NavGraphBuilder.list(navigateEvent: NavigateEventImpl) {
     template(

@@ -1,10 +1,9 @@
 package com.example.dr_web.domain.usecase
 
-import com.example.dr_web.domain.repository.PackageRepository
 import com.example.dr_web.domain.entity.Package
+import com.example.dr_web.domain.repository.PackageRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.util.UUID
 import javax.inject.Inject
 
 class GetPackageUseCase @Inject constructor(

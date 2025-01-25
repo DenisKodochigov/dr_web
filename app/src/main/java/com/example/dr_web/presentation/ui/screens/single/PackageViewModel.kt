@@ -1,7 +1,5 @@
 package com.example.dr_web.presentation.ui.screens.single
 
-import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewModelScope
 import com.example.dr_web.domain.usecase.GetPackageUseCase
 import com.example.dr_web.domain.usecase.StartPackageUseCase
@@ -10,7 +8,6 @@ import com.example.dr_web.presentation.comon.state.MviViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel

@@ -2,7 +2,6 @@ package com.example.dr_web.data.entity
 
 import android.graphics.drawable.Drawable
 import com.example.dr_web.domain.entity.Package
-import java.util.UUID
 
 data class PackageImpl(
     override val hash: String,
