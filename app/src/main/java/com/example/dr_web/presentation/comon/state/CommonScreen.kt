@@ -22,7 +22,7 @@ fun <T : Any> CommonScreen(loader: DataLoader<T>, onSuccess: @Composable (T) -> 
 @Composable
 fun Error(errorMessage: String) {
     Column( modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom,
-        content = { Snackbar { Text(text = errorMessage) } })
+        content = { Snackbar { Text(text = "CommonScreen $errorMessage") } })
 }
 
 @Composable

@@ -1,7 +1,7 @@
 package com.example.dr_web.domain.usecase
 
-import com.example.dr_web.domain.entity.UseCaseException
 import com.example.dr_web.domain.entity.Result
+import com.example.dr_web.domain.entity.UseCaseException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

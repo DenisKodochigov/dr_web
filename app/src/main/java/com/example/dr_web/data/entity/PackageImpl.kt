@@ -1,12 +1,14 @@
 package com.example.dr_web.data.entity
 
+import android.graphics.drawable.Drawable
 import com.example.dr_web.domain.entity.Package
+import java.util.UUID
 
 data class PackageImpl(
-    override val id: Long,
+    override val hash: String,
+    override val icon: Drawable?,
     override val name: String,
-    override val par1: String,
-    override val par2: String,
-    override val par3: String,
-    override val par4: String
+    override val packages: String,
+    override val crc: String,
+    override val version: String
 ): Package

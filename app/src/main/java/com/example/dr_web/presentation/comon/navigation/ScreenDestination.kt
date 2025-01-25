@@ -46,7 +46,7 @@ object SecondDestination : ScreenDestination {
 
     const val ARG = "arg_application"
     override val routeWithArgs = "$route/{$ARG}"
-    val arguments = listOf(navArgument(ARG) { type = NavType.LongType })
+    val arguments = listOf(navArgument(ARG) { type = NavType.StringType })
 }
 val navBottomScreens = listOf(MainDestination, SecondDestination)
 val listScreens = listOf(MainDestination, SecondDestination)

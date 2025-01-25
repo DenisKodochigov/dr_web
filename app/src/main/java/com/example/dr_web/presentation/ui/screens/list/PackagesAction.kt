@@ -4,6 +4,6 @@ import com.example.dr_web.presentation.comon.state.UiAction
 
 sealed class PackagesAction: UiAction {
     data object GetPackages : PackagesAction()
-    data class BackClick(val userId: Long) : PackagesAction()
-    data class PackageClick(val id: Long) : PackagesAction()
+    data class BackClick(val id: Long) : PackagesAction()
+    data class PackageClick(val id: String) : PackagesAction()
 }

@@ -12,6 +12,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
@@ -19,6 +20,8 @@ import androidx.navigation.compose.composable
 import com.example.dr_web.presentation.ui.screens.Greeting
 import com.example.dr_web.presentation.ui.screens.list.PackagesScreen
 import com.example.dr_web.presentation.ui.screens.list.PackagesViewModel
+import com.example.dr_web.presentation.ui.screens.single.PackageScreen
+import com.example.dr_web.presentation.ui.screens.single.PackageViewModel
 
 fun NavGraphBuilder.list(navigateEvent: NavigateEventImpl) {
     template(
@@ -33,10 +36,8 @@ fun NavGraphBuilder.single(navigateEvent: NavigateEventImpl) {
         routeTo = SecondDestination.routeWithArgs,
         argument = SecondDestination.arguments,
         content = { navBackStackEntry ->
-            Greeting(name = " Testing application")
-//            PackageScreen( hiltViewModel<PackageViewModel>().also { it.initNavigate(navigateEvent) },
-//                arg = ArgPackageScreen(id = navBackStackEntry.arguments?.getLong(SecondDestination.ARG) ?: 0)
-//            )
+            PackageScreen( navigateEvent = navigateEvent,
+                packageName = navBackStackEntry.arguments?.getString(SecondDestination.ARG) ?: "")
         }
     )
 }

@@ -1,19 +1,24 @@
-package com.example.dr_web.presentation.ui.screens.list
+package com.example.dr_web.presentation.ui.screens.single
 
+import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewModelScope
-import com.example.dr_web.domain.usecase.GetPackagesUseCase
+import com.example.dr_web.domain.usecase.GetPackageUseCase
+import com.example.dr_web.domain.usecase.StartPackageUseCase
 import com.example.dr_web.presentation.comon.state.DataLoader
 import com.example.dr_web.presentation.comon.state.MviViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
-class PackagesViewModel @Inject constructor(
-    private val useCase: GetPackagesUseCase,
-    private val converter: PackagesConverter,):
-    MviViewModel<PackagesState, DataLoader<PackagesState>, PackagesAction>() {
+class PackageViewModel @Inject constructor(
+    private val getPackageUseCase: GetPackageUseCase,
+    private val startPackageUseCase: StartPackageUseCase,
+    private val converter: PackageConverter,):
+    MviViewModel<PackageState, DataLoader<PackageState>, PackageAction>() {
 //class PackagesViewModel @Inject constructor():MviViewModel<T: Any, S: DataLoader<T>, A: UiAction>
 //    private val _uiStateFlow: MutableStateFlow<S> by lazy { MutableStateFlow(initState()) }
 //    val uiStateFlow: StateFlow<S> = _uiStateFlow
@@ -24,19 +29,24 @@ class PackagesViewModel @Inject constructor(
 //    fun submitAction(action: A) { viewModelScope.launch { actionFlow.emit(action) } }
 //    fun submitState(state: S) { viewModelScope.launch { _uiStateFlow.value = state } }
 
-    override fun initState(): DataLoader<PackagesState> = DataLoader.Loading
-    override fun handleAction(action: PackagesAction) {
+    override fun initState(): DataLoader<PackageState> = DataLoader.Loading
+
+    override fun handleAction(action: PackageAction) {
         when (action) {
-            is PackagesAction.GetPackages -> { getPackages() }
-            is PackagesAction.PackageClick -> {
-                navigate.goToScreenPackage(action.id) }
-            is PackagesAction.BackClick -> { navigate.backStack()}
+            is PackageAction.GetPackage -> { getPackage(action.packageName) }
+            is PackageAction.BackClick -> { navigate.backStack()}
+            is PackageAction.StartPackage -> startPackage(action.packageName)
         }
     }
-    private fun getPackages() {
+    private fun getPackage(packageName: String) {
         viewModelScope.launch {
-            useCase.execute(GetPackagesUseCase.Request(0))
+            getPackageUseCase.execute(GetPackageUseCase.Request(packageName))
                 .map { converter.convert(it) }.collect { submitState(it) }
+        }
+    }
+    private fun startPackage(packageName: String) {
+        viewModelScope.launch {
+            startPackageUseCase.execute(StartPackageUseCase.Request(packageName))
         }
     }
 }

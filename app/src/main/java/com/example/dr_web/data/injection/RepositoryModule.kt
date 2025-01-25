@@ -1,6 +1,5 @@
 package com.example.dr_web.data.injection
 
-
 import com.example.dr_web.data.repository.PackageRepositoryImpl
 import com.example.dr_web.domain.repository.PackageRepository
 import dagger.Binds
