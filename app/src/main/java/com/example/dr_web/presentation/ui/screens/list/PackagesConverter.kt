@@ -15,7 +15,7 @@ class PackagesConverter @Inject constructor() :
                     name = it.name,
                     hash = it.hash,
                     icon = it.icon,
-                    packageName = it.packages) }.sortedBy { it.packageName }
+                    packageName = it.packages) }.sortedBy { it.name }
         )
     }
 }

@@ -19,15 +19,6 @@ class PackageViewModel @Inject constructor(
     private val startPackageUseCase: StartPackageUseCase,
     private val converter: PackageConverter,):
     MviViewModel<PackageState, DataLoader<PackageState>, PackageAction>() {
-//class PackagesViewModel @Inject constructor():MviViewModel<T: Any, S: DataLoader<T>, A: UiAction>
-//    private val _uiStateFlow: MutableStateFlow<S> by lazy { MutableStateFlow(initState()) }
-//    val uiStateFlow: StateFlow<S> = _uiStateFlow
-//    private val _uiStateFlow: MutableStateFlow<DataLoader<PackagesState>> by lazy { MutableStateFlow(initState())
-//    val uiStateFlow: StateFlow<DataLoader<PackagesState>> = _uiStateFlow
-//    private val actionFlow: MutableSharedFlow<A> = MutableSharedFlow()
-//    init { viewModelScope.launch { actionFlow.collect { handleAction(it) } } }
-//    fun submitAction(action: A) { viewModelScope.launch { actionFlow.emit(action) } }
-//    fun submitState(state: S) { viewModelScope.launch { _uiStateFlow.value = state } }
 
     override fun initState(): DataLoader<PackageState> = DataLoader.Loading
 
