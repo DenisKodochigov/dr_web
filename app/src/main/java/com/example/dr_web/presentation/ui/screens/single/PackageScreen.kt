@@ -49,12 +49,9 @@ fun PackageScreen(navigateEvent: NavigateEventImpl, packageName: String) {
 }
 @Composable fun RowViewParameter(head: String, body: String){
 
-    Row( modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(text = "$head : ", modifier = Modifier.padding(vertical = 0.dp).width(80.dp),
-            style = MaterialTheme.typography.bodyMedium)
-        Text(text = body, modifier = Modifier.padding(vertical = 0.dp).weight(1f),
+    Column( modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),) {
+        Text(text = "$head : ", style = MaterialTheme.typography.bodyMedium)
+        Text(text = body, modifier = Modifier.padding(start = 24.dp,),
             style = MaterialTheme.typography.bodyMedium)
     }
 

@@ -19,4 +19,8 @@ class PackageSourceImpl @Inject constructor(
 
     override fun getPackage(packageName: String): Flow<Package> {
         return flow {  emit (convertor.convertWithCRC(packageService.getPackage(packageName)))}}
+
+    override fun startPackage(packageName: String) {
+        packageService.startPackage(packageName)
+    }
 }

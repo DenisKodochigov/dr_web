@@ -14,4 +14,8 @@ class PackageRepositoryImpl @Inject constructor(private val packageSource: Packa
     override fun getPackage(packageName: String): Flow<Package> {
         return packageSource.getPackage(packageName)
     }
+
+    override fun startPackage(packageName: String) {
+        packageSource.startPackage(packageName)
+    }
 }
