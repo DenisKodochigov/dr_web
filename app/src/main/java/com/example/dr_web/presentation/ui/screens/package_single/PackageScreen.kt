@@ -1,12 +1,10 @@
-package com.example.dr_web.presentation.ui.screens.single
+package com.example.dr_web.presentation.ui.screens.package_single
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,12 +22,12 @@ import com.example.dr_web.presentation.comon.state.CommonScreen
 @Composable
 fun PackageScreen(navigateEvent: NavigateEventImpl, packageName: String) {
     val vm: PackageViewModel = hiltViewModel()
-
-    vm.initNavigate(navigateEvent)
-    LaunchedEffect(Unit) { vm.submitAction(PackageAction.GetPackage(packageName)) }
+    val action = vm.action
+    action.initNavigate(navigateEvent)
+    LaunchedEffect(Unit) { action.getPackage(packageName) }
     vm.dataStateFlow.collectAsState().value.let { dataLoader ->
         CommonScreen( loader = dataLoader ) { dataState->
-            PackageList(dataState) { vm.submitAction(PackageAction.StartPackage(dataState.item.packageName))}
+            PackageList(dataState) { action.packageRun( dataState.item.packageName)}
         }
     }
 }

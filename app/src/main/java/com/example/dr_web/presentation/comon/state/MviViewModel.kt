@@ -8,15 +8,20 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-abstract class MviViewModel<T: Any, S: DataLoader<T>, A: UiAction>: ViewModel() {
+abstract class MviViewModel<T: Any, S: ScreenState<T>>: ViewModel() {
+    interface UiArguments
     abstract fun initState(): S
-    abstract fun handleAction(action: A)
+    abstract fun handleEvent(action: UiArguments)
+
     private val _dataStateFlow: MutableStateFlow<S> by lazy { MutableStateFlow(initState()) }
     val dataStateFlow: StateFlow<S> = _dataStateFlow
-    private val actionFlow: MutableSharedFlow<A> = MutableSharedFlow()
-    init { viewModelScope.launch { actionFlow.collect { handleAction(it) } } }
+
+    private val eventFlow: MutableSharedFlow<UiArguments> = MutableSharedFlow()
     lateinit var navigate: NavigateEvent
+
+    init { viewModelScope.launch { eventFlow.collect { handleEvent(it) } } }
+
     fun initNavigate(navigateEvent: NavigateEvent) { navigate = navigateEvent}
-    fun submitAction(action: A) { viewModelScope.launch { actionFlow.emit(action) } }
+    fun submitEvent(event: UiArguments) { viewModelScope.launch {eventFlow.emit(event) } }
     fun submitState(state: S) { viewModelScope.launch { _dataStateFlow.value = state } }
 }

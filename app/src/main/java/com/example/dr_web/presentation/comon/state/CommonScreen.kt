@@ -11,11 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun <T : Any> CommonScreen(loader: DataLoader<T>, onSuccess: @Composable (T) -> Unit) {
+fun <T : Any> CommonScreen(loader: ScreenState<T>, onSuccess: @Composable (T) -> Unit) {
     when (loader) {
-        is DataLoader.Loading -> { Loading() }
-        is DataLoader.Error -> { Error(loader.errorMessage) }
-        is DataLoader.Success -> { onSuccess(loader.dataState) }
+        is ScreenState.Loading -> { Loading() }
+        is ScreenState.Error -> { Error(loader.errorMessage) }
+        is ScreenState.Success -> { onSuccess(loader.dataState) }
     }
 }
 

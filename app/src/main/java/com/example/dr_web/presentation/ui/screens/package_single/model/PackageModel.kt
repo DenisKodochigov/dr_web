@@ -1,4 +1,4 @@
-package com.example.dr_web.presentation.ui.screens.single
+package com.example.dr_web.presentation.ui.screens.package_single.model
 
 import android.graphics.drawable.Drawable
 

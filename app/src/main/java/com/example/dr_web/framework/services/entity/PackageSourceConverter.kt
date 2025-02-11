@@ -2,6 +2,7 @@ package com.example.dr_web.framework.services.entity
 
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.util.Log
 import com.example.dr_web.data.entity.PackageImpl
 import java.io.File
 import javax.inject.Inject
@@ -11,8 +12,6 @@ class PackageSourceConverter @Inject constructor(
     private val packageManager: PackageManager,
     private val checkSum: CheckSum,) {
     fun convert(info: PackageInfo): PackageImpl {
-//        val nn = info.applicationInfo!!.loadLabel(packageManager)
-//        val name = info.applicationInfo?.name?.replace("${info.packageName}.", "") ?: info.packageName
         return PackageImpl(
             hash = info.hashCode().toString(),
             name = info.applicationInfo!!.loadLabel(packageManager).toString(),
@@ -23,7 +22,6 @@ class PackageSourceConverter @Inject constructor(
     }
 
     fun convertWithCRC(info: PackageInfo): PackageImpl {
-//        val name = info.applicationInfo?.name?.replace("${info.packageName}.", "") ?: info.packageName
         return PackageImpl(
             hash = info.hashCode().toString(),
             name = info.applicationInfo!!.loadLabel(packageManager).toString(),

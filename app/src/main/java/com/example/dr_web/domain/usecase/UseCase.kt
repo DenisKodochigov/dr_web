@@ -4,11 +4,13 @@ import com.example.dr_web.domain.entity.Result
 import com.example.dr_web.domain.entity.UseCaseException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
-abstract class UseCase<I : UseCase.Request, O : UseCase.Response>(private val configuration: Configuration) {
+abstract class UseCase<I: UseCase.Request, O: UseCase.Response>(private val configuration: Configuration) {
     fun execute(request: I) = process(request)
         .map { Result.Success(it) as Result<O> }
         .flowOn(configuration.dispatcher)

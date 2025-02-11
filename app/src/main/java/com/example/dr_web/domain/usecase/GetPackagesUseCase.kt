@@ -10,20 +10,17 @@ import javax.inject.Inject
 class GetPackagesUseCase @Inject constructor(
     configuration: Configuration,
     private val packageRepository: PackageRepository
-) : UseCase<GetPackagesUseCase.Request, GetPackagesUseCase.Response>(configuration) {
+): UseCase< GetPackagesUseCase.Request, GetPackagesUseCase.Response>(configuration) {
 
     private var packageList: List<Package> = emptyList()
+
     override fun process(request: Request): Flow<Response> {
-        val result = if (packageList.isEmpty()){
-            packageRepository.getPackages().map {
-                    packageList = it
-                    Response(it)
-                }
-            } else { flow { emit(Response(packageList)) } }
+        val result =
+            if (packageList.isEmpty()){
+                packageRepository.getPackages().map { packageList = it; Response(it) } }
+            else { flow { emit(Response(packageList)) } }
         return result
     }
-
     data class Request(val id: Long) : UseCase.Request
     data class Response(val packages: List<Package>) : UseCase.Response
-
 }

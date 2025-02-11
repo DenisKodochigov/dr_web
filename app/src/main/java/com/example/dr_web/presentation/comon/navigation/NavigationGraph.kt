@@ -16,8 +16,8 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.dr_web.presentation.ui.screens.list.PackagesScreen
-import com.example.dr_web.presentation.ui.screens.single.PackageScreen
+import com.example.dr_web.presentation.ui.screens.package_list.PackagesScreen
+import com.example.dr_web.presentation.ui.screens.package_single.PackageScreen
 
 fun NavGraphBuilder.list(navigateEvent: NavigateEventImpl) {
     template(

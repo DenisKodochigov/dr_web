@@ -1,4 +1,4 @@
-package com.example.dr_web.presentation.ui.screens.list
+package com.example.dr_web.presentation.ui.screens.package_list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -20,16 +20,17 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.dr_web.presentation.comon.navigation.NavigateEventImpl
 import com.example.dr_web.presentation.comon.state.CommonScreen
+import com.example.dr_web.presentation.ui.screens.package_list.model.PackagesItemModel
 
 @Composable
 fun PackagesScreen(navigateEvent: NavigateEventImpl) {
     val vm: PackagesViewModel = hiltViewModel()
-    vm.initNavigate(navigateEvent)
-    LaunchedEffect(Unit) { vm.submitAction(PackagesAction.GetPackages) }
+    val action = vm.action
+    action.initNavigate(navigateEvent)
+    LaunchedEffect(Unit) { action.getPackages() }
     vm.dataStateFlow.collectAsState().value.let { dataLoader ->
         CommonScreen( loader = dataLoader ) { dataState->
-            PackageList( dataState){ item ->
-                vm.submitAction(PackagesAction.PackageClick(item.packageName)) }
+            PackageList( dataState){ item -> action.packageClick(item.packageName)}
         }
     }
 }
