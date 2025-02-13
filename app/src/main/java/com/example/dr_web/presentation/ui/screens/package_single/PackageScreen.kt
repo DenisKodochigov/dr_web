@@ -19,7 +19,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.dr_web.presentation.common.navigation.NavigateEventImpl
 import com.example.dr_web.presentation.common.state.CommonScreen
 import com.example.dr_web.presentation.common.state.Event
-import com.example.dr_web.presentation.ui.screens.package_list.PackagesEvent
 
 @Composable
 fun PackageScreen(navigateEvent: NavigateEventImpl, packageName: String) {

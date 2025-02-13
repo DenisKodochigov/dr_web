@@ -48,8 +48,8 @@ object SecondDestination : ScreenDestination {
     override val routeWithArgs = "$route/{$ARG}"
     val arguments = listOf(navArgument(ARG) { type = NavType.StringType })
 }
-val navBottomScreens = listOf(MainDestination, SecondDestination)
-val listScreens = listOf(MainDestination, SecondDestination)
+//val navBottomScreens = listOf(MainDestination, SecondDestination)
+//val listScreens = listOf(MainDestination, SecondDestination)
 val DEFAULT_SCREEN = MainDestination
 const val DURATION_SCREEN = 800
 const val DELAY_SCREEN = 200

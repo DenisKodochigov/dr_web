@@ -3,14 +3,10 @@ package com.example.dr_web.presentation.common.state
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dr_web.presentation.common.navigation.NavigateEvent
-import com.example.dr_web.presentation.ui.screens.package_list.PackagesEvent
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import java.lang.Package.getPackages
 
 abstract class CommonViewModel<T: Any, S: ScreenState<T>>: ViewModel() {
     abstract fun initState(): S

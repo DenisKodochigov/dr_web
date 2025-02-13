@@ -1,6 +1,5 @@
 package com.example.dr_web.presentation.ui.screens.package_list
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.dr_web.domain.usecase.GetPackagesUseCase
 import com.example.dr_web.presentation.common.state.CommonViewModel
