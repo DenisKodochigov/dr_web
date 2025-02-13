@@ -1,27 +1,30 @@
-package com.example.dr_web.presentation.comon.state
+package com.example.dr_web.presentation.common.state
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dr_web.presentation.comon.navigation.NavigateEvent
+import com.example.dr_web.presentation.common.navigation.NavigateEvent
+import com.example.dr_web.presentation.ui.screens.package_list.PackagesEvent
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.lang.Package.getPackages
 
-abstract class MviViewModel<T: Any, S: ScreenState<T>>: ViewModel() {
-    interface UiArguments
+abstract class CommonViewModel<T: Any, S: ScreenState<T>>: ViewModel() {
     abstract fun initState(): S
-    abstract fun handleEvent(action: UiArguments)
+    abstract fun handleEvent(action: Event)
 
+    private val eventFlow: MutableSharedFlow<Event> = MutableSharedFlow()
     private val _dataStateFlow: MutableStateFlow<S> by lazy { MutableStateFlow(initState()) }
     val dataStateFlow: StateFlow<S> = _dataStateFlow
 
-    private val eventFlow: MutableSharedFlow<UiArguments> = MutableSharedFlow()
     lateinit var navigate: NavigateEvent
 
     init { viewModelScope.launch { eventFlow.collect { handleEvent(it) } } }
 
     fun initNavigate(navigateEvent: NavigateEvent) { navigate = navigateEvent}
-    fun submitEvent(event: UiArguments) { viewModelScope.launch {eventFlow.emit(event) } }
+    fun submitEvent(event: Event) { viewModelScope.launch { eventFlow.emit(event) } }
     fun submitState(state: S) { viewModelScope.launch { _dataStateFlow.value = state } }
 }

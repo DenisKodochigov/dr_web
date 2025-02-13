@@ -7,13 +7,13 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.0"
-composeBom = "2025.01.00"
+composeBom = "2025.02.00"
 
-navigationCompose = "2.8.5"
+navigationCompose = "2.8.7"
 hilt = "2.54"
 kspVersion = "2.1.0-1.0.29"
 hiltNavigationCompose = "1.2.0"
-composeV = "1.7.6"
+composeV = "1.7.8"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

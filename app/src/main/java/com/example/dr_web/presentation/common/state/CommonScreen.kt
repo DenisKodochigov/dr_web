@@ -1,4 +1,4 @@
-package com.example.dr_web.presentation.comon.state
+package com.example.dr_web.presentation.common.state
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

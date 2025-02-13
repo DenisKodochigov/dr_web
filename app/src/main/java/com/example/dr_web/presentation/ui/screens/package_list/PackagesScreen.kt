@@ -18,19 +18,20 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.dr_web.presentation.comon.navigation.NavigateEventImpl
-import com.example.dr_web.presentation.comon.state.CommonScreen
+import com.example.dr_web.presentation.common.navigation.NavigateEventImpl
+import com.example.dr_web.presentation.common.state.CommonScreen
+import com.example.dr_web.presentation.common.state.Event
 import com.example.dr_web.presentation.ui.screens.package_list.model.PackagesItemModel
 
 @Composable
 fun PackagesScreen(navigateEvent: NavigateEventImpl) {
     val vm: PackagesViewModel = hiltViewModel()
-    val action = vm.action
-    action.initNavigate(navigateEvent)
-    LaunchedEffect(Unit) { action.getPackages() }
+    vm.initNavigate(navigateEvent)
+    val action:(Event)->Unit = { vm.submitEvent(it) }
+    LaunchedEffect(Unit) { action(PackagesEvent.GetPackages)}
     vm.dataStateFlow.collectAsState().value.let { dataLoader ->
         CommonScreen( loader = dataLoader ) { dataState->
-            PackageList( dataState){ item -> action.packageClick(item.packageName)}
+            PackageList(dataState){ item -> action(PackagesEvent.PackageClick(item.packageName))}
         }
     }
 }

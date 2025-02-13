@@ -1,4 +1,4 @@
-package com.example.dr_web.presentation.comon.state
+package com.example.dr_web.presentation.common.state
 
 sealed class ScreenState<out T: Any> {
     data object Loading: ScreenState<Nothing>()

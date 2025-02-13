@@ -16,18 +16,21 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.dr_web.presentation.comon.navigation.NavigateEventImpl
-import com.example.dr_web.presentation.comon.state.CommonScreen
+import com.example.dr_web.presentation.common.navigation.NavigateEventImpl
+import com.example.dr_web.presentation.common.state.CommonScreen
+import com.example.dr_web.presentation.common.state.Event
+import com.example.dr_web.presentation.ui.screens.package_list.PackagesEvent
 
 @Composable
 fun PackageScreen(navigateEvent: NavigateEventImpl, packageName: String) {
     val vm: PackageViewModel = hiltViewModel()
-    val action = vm.action
-    action.initNavigate(navigateEvent)
-    LaunchedEffect(Unit) { action.getPackage(packageName) }
+    vm.initNavigate(navigateEvent)
+    val action:(Event)->Unit = { vm.submitEvent(it) }
+    LaunchedEffect(Unit) { action(PackageEvent.GetPackage(packageName)) }
     vm.dataStateFlow.collectAsState().value.let { dataLoader ->
         CommonScreen( loader = dataLoader ) { dataState->
-            PackageList(dataState) { action.packageRun( dataState.item.packageName)}
+            PackageList(dataState) {
+                action(PackageEvent.RunPackage(dataState.item.packageName))}
         }
     }
 }

@@ -1,9 +1,11 @@
 package com.example.dr_web.presentation.ui.screens.package_list
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.dr_web.domain.usecase.GetPackagesUseCase
-import com.example.dr_web.presentation.comon.state.MviViewModel
-import com.example.dr_web.presentation.comon.state.ScreenState
+import com.example.dr_web.presentation.common.state.CommonViewModel
+import com.example.dr_web.presentation.common.state.Event
+import com.example.dr_web.presentation.common.state.ScreenState
 import com.example.dr_web.presentation.ui.screens.package_list.model.PackagesConverter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
@@ -14,26 +16,15 @@ import javax.inject.Inject
 class PackagesViewModel @Inject constructor(
     private val useCase: GetPackagesUseCase,
     private val converter: PackagesConverter,):
-    MviViewModel<PackagesState, ScreenState<PackagesState>>() {
+    CommonViewModel<PackagesState, ScreenState<PackagesState>>() {
 
     override fun initState(): ScreenState<PackagesState> = ScreenState.Loading
-    val action = PackagesAction(
-        getPackages = { submitEvent(Arguments.GetPackages)},
-        backScreen = { submitEvent(Arguments.BackClick)},
-        packageClick = { submitEvent(Arguments.PackageClick(it))},
-        initNavigate = { initNavigate(it) }
-    )
-    sealed class Arguments: UiArguments{
-        data object GetPackages : Arguments()
-        data object BackClick : Arguments()
-        data class PackageClick(val id: String) : Arguments()
-    }
 
-    override fun handleEvent(argument: UiArguments) {
+    override fun handleEvent(argument: Event) {
         when (argument) {
-            is Arguments.GetPackages -> { getPackages() }
-            is Arguments.PackageClick -> { navigate.goToScreenPackage(argument.id) }
-            is Arguments.BackClick -> { navigate.backStack()}
+            is PackagesEvent.GetPackages -> { getPackages() }
+            is PackagesEvent.PackageClick -> { navigate.goToScreenPackage(argument.id) }
+            is PackagesEvent.BackClick -> { navigate.backStack()}
         }
     }
     private fun getPackages() {

@@ -2,7 +2,6 @@ package com.example.dr_web.framework.services.entity
 
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.util.Log
 import com.example.dr_web.data.entity.PackageImpl
 import java.io.File
 import javax.inject.Inject

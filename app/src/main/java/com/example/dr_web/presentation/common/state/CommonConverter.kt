@@ -1,4 +1,4 @@
-package com.example.dr_web.presentation.comon.state
+package com.example.dr_web.presentation.common.state
 
 import com.example.dr_web.domain.entity.Result
 

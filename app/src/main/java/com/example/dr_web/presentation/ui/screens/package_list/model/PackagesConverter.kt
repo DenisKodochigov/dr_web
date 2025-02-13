@@ -1,7 +1,7 @@
 package com.example.dr_web.presentation.ui.screens.package_list.model
 
 import com.example.dr_web.domain.usecase.GetPackagesUseCase
-import com.example.dr_web.presentation.comon.state.CommonConverter
+import com.example.dr_web.presentation.common.state.CommonConverter
 import com.example.dr_web.presentation.ui.screens.package_list.PackagesState
 import javax.inject.Inject
 

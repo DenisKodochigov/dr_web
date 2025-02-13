@@ -1,4 +1,4 @@
-package com.example.dr_web.presentation.comon.navigation
+package com.example.dr_web.presentation.common.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccessAlarms
