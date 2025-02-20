@@ -12,6 +12,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
@@ -23,7 +24,7 @@ fun NavGraphBuilder.list(navigateEvent: NavigateEventImpl) {
     template(
         routeTo = MainDestination.route,
         content = {
-            PackagesScreen( navigateEvent)
+            PackagesScreen( navigateEvent )
         }
     )
 }

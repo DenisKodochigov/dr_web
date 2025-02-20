@@ -1,6 +1,5 @@
 package com.example.dr_web.presentation.ui.screens.package_list
 
-import android.R.attr.action
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -22,20 +21,21 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.dr_web.presentation.common.navigation.NavigateEventImpl
 import com.example.dr_web.presentation.common.state.Action
 import com.example.dr_web.presentation.common.state.CommonScreen
-import com.example.dr_web.presentation.common.state.Event
 import com.example.dr_web.presentation.ui.screens.package_list.model.PackagesItemModel
+import com.example.dr_web.presentation.ui.screens.package_single.PackagesScreenCl
 
 @Composable
 fun PackagesScreen(navigateEvent: NavigateEventImpl) {
-    val vm: PackagesViewModel = hiltViewModel()
-    vm.initNavigate(navigateEvent)
-    val action = Action { vm.submitEvent(it) }
-    LaunchedEffect(Unit) { action.ex(PackagesEvent.GetPackages)}
-    vm.dataStateFlow.collectAsState().value.let { dataLoader ->
-        CommonScreen( loader = dataLoader ) { dataState->
-            PackageList(dataState){ item -> action.ex(PackagesEvent.PackageClick(item.packageName))}
-        }
-    }
+//    val vm: PackagesViewModel = hiltViewModel()
+//    vm.initNavigate(navigateEvent)
+//    val action = Action { vm.submitEvent(it) }
+//    LaunchedEffect(Unit) { action.ex(PackagesEvent.GetPackages)}
+//    vm.dataStateFlow.collectAsState().value.let { dataLoader ->
+//        CommonScreen( loader = dataLoader ) { dataState->
+//            PackageList(dataState){ item -> action.ex(PackagesEvent.PackageClick(item.packageName))}
+//        }
+//    }
+    PackagesScreenCl( vm = hiltViewModel(), navigateEvent ).ScreenView()
 }
 
 @Composable fun PackageList(dataState: PackagesState, onRowClick: (PackagesItemModel) -> Unit, ) {

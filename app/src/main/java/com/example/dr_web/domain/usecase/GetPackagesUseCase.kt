@@ -1,5 +1,6 @@
 package com.example.dr_web.domain.usecase
 
+import android.util.Log
 import com.example.dr_web.domain.entity.Package
 import com.example.dr_web.domain.repository.PackageRepository
 import kotlinx.coroutines.flow.Flow
@@ -17,7 +18,9 @@ class GetPackagesUseCase @Inject constructor(
     override fun process(request: Request): Flow<Response> {
         val result =
             if (packageList.isEmpty()){
-                packageRepository.getPackages().map { packageList = it; Response(it) } }
+                packageRepository.getPackages().map {
+                    Log.d("KDS", "$it")
+                    packageList = it; Response(it) } }
             else { flow { emit(Response(packageList)) } }
         return result
     }
